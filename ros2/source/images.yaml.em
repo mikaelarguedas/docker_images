@@ -19,12 +19,11 @@ images:
             - libasio-dev
             - libcurl4-openssl-dev
             - libeigen3-dev
+            - libfreetype6-dev
             - libgles2-mesa-dev
             - libglu1-mesa-dev
             - libopencv-dev
             - libpoco-dev
-            - libpocofoundation9v5
-            - libpocofoundation9v5-dbg
             - libqt5core5a
             - libqt5gui5
             - libqt5opengl5
@@ -34,10 +33,12 @@ images:
             - libtinyxml-dev
             - libtinyxml2-dev
             - libxaw7-dev
+            - libxrandr-dev
             - openssl
             - pydocstyle
             - pyflakes
             - python-empy
+            - python3-colcon-common-extensions
             - python3-coverage
             - python3-dev
             - python3-empy
@@ -47,13 +48,14 @@ images:
             - python3-pip
             - python3-pyparsing
             - python3-setuptools
-            - python3-vcstool
+            # - python3-vcstool
             - python3-yaml
             - qtbase5-dev
             - uncrustify
             - wget
         pip3_install:
             - argcomplete
+            - catkin_pkg
             - flake8
             - flake8-blind-except
             - flake8-builtins
@@ -65,16 +67,17 @@ images:
             - flake8-quotes
             - pytest
             - pytest-cov
+            - pytest-repeat
+            - pytest-rerun-failures
             - pytest-runner
+            - vcstool
         ws: /root/ros2_ws
-        ament_args:
+        colcon_args:
             - build
-            - --build-tests
             - --cmake-args
-                -DSECURITY=ON --
-            - --isolated
-            - --parallel
+                " -DBUILD_TESTING=ON" " -DSECURITY=ON"
             - --symlink-install
+            - --event-handler console_cohesion+
         vcs:
             ros2:
                 repos: https://raw.githubusercontent.com/ros2/ros2/release-latest/ros2.repos
