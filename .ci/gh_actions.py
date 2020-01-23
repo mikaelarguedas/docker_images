@@ -76,6 +76,7 @@ def main(argv=sys.argv[1:]):
     HUB_OS_NAME = os.environ['HUB_OS_NAME']
     HUB_OS_CODE_NAME = os.environ['HUB_OS_CODE_NAME']
     GIT_BRANCH = os.environ['GITHUB_BASE_REF']
+    GIT_PULL_REQUEST_BRANCH = os.environ['GITHUB_HEAD_REF']
     GIT_UPSTREAM_REPO_SLUG = os.environ['GITHUB_REPOSITORY']
     GIT_BUILD_DIR = os.environ['GITHUB_WORKSPACE']
     GITHUB_EVENT_NAME = os.environ['GITHUB_EVENT_NAME']
@@ -87,10 +88,7 @@ def main(argv=sys.argv[1:]):
     print("GIT_UPSTREAM_REPO_SLUG: ", GIT_UPSTREAM_REPO_SLUG)
     print("GIT_BRANCH: ", GIT_BRANCH)
     print("GITHUB_EVENT_NAME: ", GITHUB_EVENT_NAME)
-    print("GITHUB_EVENT_PATH: ", os.environ['GITHUB_EVENT_PATH'])
-    print("GITHUB_REF: ", os.environ['GITHUB_REF'])
-    print("GITHUB_BASE_REF: ", os.environ['GITHUB_BASE_REF'])
-    print("GITHUB_HEAD_REF: ", os.environ['GITHUB_HEAD_REF'])
+    print("GIT_PULL_REQUEST_BRANCH: ", GIT_PULL_REQUEST_BRANCH)
 
     # Private environment variables, not available for pull requests from forks
     GIT_USER = os.environ.get('GITHUB_USER', '')
@@ -123,7 +121,7 @@ def main(argv=sys.argv[1:]):
     # Check if this is PR or Cron job test
     if GITHUB_EVENT_NAME == 'pull_request':
         # If this is a PR test
-        print("Testing Pull Request for Branch: ", GITHUB_EVENT_NAME)
+        print("Testing Pull Request for Branch: ", GIT_PULL_REQUEST_BRANCH)
 
         # Test that dockerfile generation has changed nothing
         # and that all dockerfiles are up to date
@@ -139,7 +137,7 @@ def main(argv=sys.argv[1:]):
 
     else:
         # If this is a test from CronJob or push
-        print("Testing CronJob for Branch: ", GIT_BRANCH)
+        print("Testing Branch: ", GIT_BRANCH)
 
         try:
             # Test that dockerfile generation has changed nothing
@@ -208,7 +206,7 @@ def main(argv=sys.argv[1:]):
                         inst.stderr = None
                         raise ValueError(
                             ("Force push to branch:{branch} failed! "
-                             "Stderr omitted to protect secrits.").format(branch=pr_branch_name))
+                             "Stderr omitted to protect secrets.").format(branch=pr_branch_name))
                 else:
                     # Otherwise try setting up the remote upsteam branch
                     try:
@@ -218,7 +216,7 @@ def main(argv=sys.argv[1:]):
                         inst.stderr = None
                         raise ValueError(
                             ("Set-upstream push to branch:{branch} failed! "
-                             "Stderr omitted to protect secrits.").format(branch=pr_branch_name))
+                             "Stderr omitted to protect secrets.").format(branch=pr_branch_name))
 
                 # Add some commentary for new PR
                 title = "Updating {}".format(pr_branch_name)

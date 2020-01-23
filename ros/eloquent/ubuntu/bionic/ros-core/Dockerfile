@@ -55,6 +55,7 @@ RUN apt-get update && apt-get install -y \
     ros-eloquent-ros-core=0.8.4-1* \
     && rm -rf /var/lib/apt/lists/*
 
+RUN echo "debug"
 # setup entrypoint
 COPY ./ros_entrypoint.sh /
 
