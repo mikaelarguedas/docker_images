@@ -8,5 +8,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "received PR event trigger"
-      - run: echo "$GITHUB_EVENT_NAME"
-   
+      - run: |
+        echo "Pull request's base branch is: ${BASE_BRANCH}"
+        env:
+          BASE_BRANCH: ${{ github.base_ref }}
+      - run: |
+        echo "Pull request's base branch is: ${HEAD_BRANCH}"
+        env:
+          HEAD_BRANCH: ${{ github.event.pull_request.head.ref }}
