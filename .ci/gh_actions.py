@@ -147,6 +147,7 @@ def main(argv=sys.argv[1:]):
         except ValueError:
             # If there are changes, only proceed for the default branch
             if GIT_BRANCH == GIT_DEFAULT_BRANCH:
+                print("GIT_BRANCH is default branch, proceeding...")
                 # Initialize github interfaces
                 g = github.Github(login_or_token=GIT_TOKEN)
                 g_origin_repo = g.get_repo(
