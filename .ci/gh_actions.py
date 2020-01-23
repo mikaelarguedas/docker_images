@@ -119,7 +119,8 @@ def main(argv=sys.argv[1:]):
     diffs = repo.index.diff(None, create_patch=True)
 
     # Check if this is PR or Cron job test
-    if GITHUB_EVENT_NAME == 'pull_request':
+    # if GITHUB_EVENT_NAME == 'pull_request':
+    if GITHUB_EVENT_NAME == 'garbage':
         # If this is a PR test
         print("Testing Pull Request for Branch: ", GIT_PULL_REQUEST_BRANCH)
 
