@@ -26,8 +26,6 @@ RUN apt-get update && apt-get install -q -y \
     gazebo10=10.1.0-1* \
     && rm -rf /var/lib/apt/lists/*
 
-RUN echo "coucou"
-
 # setup environment
 EXPOSE 11345
 
