@@ -50,6 +50,7 @@ RUN apt-get update && apt-get install -y \
     ros-ardent-ros-core=0.4.0-1* \
     && rm -rf /var/lib/apt/lists/*
 
+RUN echo "should NOT trigger CI"
 # setup entrypoint
 COPY ./ros_entrypoint.sh /
 
