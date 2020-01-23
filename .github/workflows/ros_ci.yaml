@@ -15,7 +15,7 @@ on:
     - 'ros/melodic/**'
     - 'ros/kinetic/**'
 jobs:
-  ros_compare_to_templates:
+  ros_ci:
     strategy:
       fail-fast: false
       matrix:
