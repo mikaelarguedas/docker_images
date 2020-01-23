@@ -12,7 +12,7 @@ on:
     - 'gazebo/9/**'
     - 'gazebo/7/**'
 jobs:
-  ros_ci:
+  gazebo_compare_to_template:
     strategy:
       fail-fast: false
       matrix:
