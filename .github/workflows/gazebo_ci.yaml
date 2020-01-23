@@ -14,6 +14,7 @@ on:
 jobs:
   ros_ci:
     strategy:
+      fail-fast: false
       matrix:
         env:
           - {HUB_REPO: gazebo, HUB_RELEASE: 10, HUB_OS_NAME: ubuntu, HUB_OS_CODE_NAME: bionic}

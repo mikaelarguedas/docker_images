@@ -9,6 +9,7 @@ on:
 jobs:
   ros2_ci:
     strategy:
+      fail-fast: false
       matrix:
         env:
           - {HUB_REPO: ros2, HUB_RELEASE: source}
