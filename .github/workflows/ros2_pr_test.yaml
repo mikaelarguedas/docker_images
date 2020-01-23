@@ -7,7 +7,7 @@ on:
     - 'ros2/nightly/**'
     - 'ros2/source/**'
 jobs:
-  ros2_ci:
+  build_images:
     strategy:
       fail-fast: false
       matrix:

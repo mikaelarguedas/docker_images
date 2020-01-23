@@ -12,7 +12,7 @@ on:
     - 'gazebo/9/**'
     - 'gazebo/7/**'
 jobs:
-  ros_ci:
+  check_images:
     strategy:
       fail-fast: false
       matrix:
