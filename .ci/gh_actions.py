@@ -76,9 +76,9 @@ def main(argv=sys.argv[1:]):
     HUB_OS_NAME = os.environ['HUB_OS_NAME']
     HUB_OS_CODE_NAME = os.environ['HUB_OS_CODE_NAME']
     GIT_BRANCH = os.environ['GITHUB_BASE_REF']
-    GIT_PULL_REQUEST_BRANCH = os.environ['GITHUB_HEAD_REF']
     GIT_UPSTREAM_REPO_SLUG = os.environ['GITHUB_REPOSITORY']
     GIT_BUILD_DIR = os.environ['GITHUB_WORKSPACE']
+    GITHUB_EVENT_NAME = os.environ['GITHUB_EVENT_NAME']
 
     print("HUB_REPO: ", HUB_REPO)
     print("HUB_RELEASE: ", HUB_RELEASE)
@@ -86,7 +86,11 @@ def main(argv=sys.argv[1:]):
     print("HUB_OS_CODE_NAME: ", HUB_OS_CODE_NAME)
     print("GIT_UPSTREAM_REPO_SLUG: ", GIT_UPSTREAM_REPO_SLUG)
     print("GIT_BRANCH: ", GIT_BRANCH)
-    print("GIT_PULL_REQUEST_BRANCH: ", GIT_PULL_REQUEST_BRANCH)
+    print("GITHUB_EVENT_NAME: ", GITHUB_EVENT_NAME)
+    print("GITHUB_EVENT_PATH: ", os.environ['GITHUB_EVENT_PATH'])
+    print("GITHUB_REF: ", os.environ['GITHUB_REF'])
+    print("GITHUB_BASE_REF: ", os.environ['GITHUB_BASE_REF'])
+    print("GITHUB_HEAD_REF: ", os.environ['GITHUB_HEAD_REF'])
 
     # Private environment variables, not available for pull requests from forks
     GIT_USER = os.environ.get('GITHUB_USER', '')
@@ -117,9 +121,9 @@ def main(argv=sys.argv[1:]):
     diffs = repo.index.diff(None, create_patch=True)
 
     # Check if this is PR or Cron job test
-    if GIT_PULL_REQUEST_BRANCH:
+    if GITHUB_EVENT_NAME == 'pull_request':
         # If this is a PR test
-        print("Testing Pull Request for Branch: ", GIT_PULL_REQUEST_BRANCH)
+        print("Testing Pull Request for Branch: ", GITHUB_EVENT_NAME)
 
         # Test that dockerfile generation has changed nothing
         # and that all dockerfiles are up to date
@@ -134,7 +138,7 @@ def main(argv=sys.argv[1:]):
             test_builds(hub_tag_dir)
 
     else:
-        # If this is a test from CronJob
+        # If this is a test from CronJob or push
         print("Testing CronJob for Branch: ", GIT_BRANCH)
 
         try:

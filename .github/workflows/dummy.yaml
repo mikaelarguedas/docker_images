@@ -8,4 +8,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "received PR event trigger"
+      - run: echo "$GITHUB_EVENT_NAME"
    
