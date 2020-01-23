@@ -79,10 +79,6 @@ def main(argv=sys.argv[1:]):
     GIT_PULL_REQUEST_BRANCH = os.environ['GITHUB_HEAD_REF']
     GIT_UPSTREAM_REPO_SLUG = os.environ['GITHUB_REPOSITORY']
     GIT_BUILD_DIR = os.environ['GITHUB_WORKSPACE']
-    # GIT_BRANCH = os.environ['TRAVIS_BRANCH']
-    # GIT_PULL_REQUEST_BRANCH = os.environ['TRAVIS_PULL_REQUEST_BRANCH']
-    # GIT_UPSTREAM_REPO_SLUG = os.environ['TRAVIS_REPO_SLUG']
-    # GIT_BUILD_DIR = os.environ['TRAVIS_BUILD_DIR']
 
     print("HUB_REPO: ", HUB_REPO)
     print("HUB_RELEASE: ", HUB_RELEASE)
@@ -93,9 +89,9 @@ def main(argv=sys.argv[1:]):
     print("GIT_PULL_REQUEST_BRANCH: ", GIT_PULL_REQUEST_BRANCH)
 
     # Private environment variables, not available for pull requests from forks
-    GIT_USER = os.environ.get('GITHUB_USER','')
-    GIT_EMAIL = os.environ.get('GITHUB_EMAIL','')
-    GIT_TOKEN = os.environ.get('GITHUB_TOKEN','')
+    GIT_USER = os.environ.get('GITHUB_USER', '')
+    GIT_EMAIL = os.environ.get('GITHUB_EMAIL', '')
+    GIT_TOKEN = os.environ.get('GITHUB_TOKEN', '')
     GIT_AUTHOR = "{user} <{email}>".format(user=GIT_USER, email=GIT_EMAIL)
     GIT_ORIGIN_REPO_SLUG = GIT_USER + '/' + \
         GIT_UPSTREAM_REPO_SLUG.split('/')[1]
@@ -145,7 +141,7 @@ def main(argv=sys.argv[1:]):
             # Test that dockerfile generation has changed nothing
             # and that all dockerfiles are up to date
             test_diffs(diffs)
-        except ValueError as err:
+        except ValueError:
             # If there are changes, only proceed for the default branch
             if GIT_BRANCH == GIT_DEFAULT_BRANCH:
                 # Initialize github interfaces
@@ -226,7 +222,7 @@ def main(argv=sys.argv[1:]):
                     body = f.read()
                 try:
                     body += bot_jokes.get_bot_joke()
-                except:
+                except Exception:
                     pass
 
                 # Get github pull for upstream
