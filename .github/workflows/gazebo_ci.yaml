@@ -3,10 +3,14 @@ name: CI Gazebo images
 on:
   pull_request:
     paths:
-      'gazebo/**'
+    - 'gazebo/10'
+    - 'gazebo/9'
+    - 'gazebo/7'
   push:
     paths:
-      'gazebo/**'
+    - 'gazebo/10'
+    - 'gazebo/9'
+    - 'gazebo/7'
 jobs:
   ros_ci:
     strategy:

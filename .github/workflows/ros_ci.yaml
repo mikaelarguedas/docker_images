@@ -4,10 +4,16 @@ name: CI ROS images
 on:
   pull_request:
     paths:
-      'ros/**'
+    - 'ros/eloquent/**'
+    - 'ros/dashing/**'
+    - 'ros/melodic/**'
+    - 'ros/kinetic/**'
   push:
     paths:
-      'ros/**'
+    - 'ros/eloquent/**'
+    - 'ros/dashing/**'
+    - 'ros/melodic/**'
+    - 'ros/kinetic/**'
 jobs:
   ros_ci:
     strategy:
