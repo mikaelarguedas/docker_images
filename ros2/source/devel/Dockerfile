@@ -82,6 +82,8 @@ RUN colcon \
 # setup bashrc
 RUN cp /etc/skel/.bashrc ~/
 
+RUN echo "debug"
+
 # setup entrypoint
 COPY ./ros_entrypoint.sh /
 
